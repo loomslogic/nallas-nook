@@ -9,7 +9,21 @@
 <link rel="apple-touch-icon" href="nallas-nook-favicon.png">
 <script>document.documentElement.classList.add("js")</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap">
-<link rel="stylesheet" href="styles.css?v=33">
+<link rel="stylesheet" href="styles.css?v=36">
+<style>
+/* Mobile hero: same banner picture as desktop, cream style */
+@media(max-width:760px){
+  .homepage .top{position:relative;color:var(--text);background:#fbf4e6}
+  .homepage .top::before{content:"";position:absolute;left:0;right:0;top:70px;height:372px;pointer-events:none;background:linear-gradient(180deg,#fbf4e6 0,rgba(251,244,230,0) 13%,rgba(251,244,230,0) 60%,rgba(251,244,230,.8) 80%,#fbf4e6 94%,#fbf4e6 100%),url(hero-bg.jpg) 100% 42%/cover no-repeat}
+  .homepage header .logo{color:var(--text)}
+  .homepage header nav a{color:#6b5444}
+  .homepage .hero{padding:338px 0 84px}
+}
+@media(min-width:520px) and (max-width:760px){
+  .homepage .top::before{background:linear-gradient(180deg,#fbf4e6 0,rgba(251,244,230,0) 13%,rgba(251,244,230,0) 60%,rgba(251,244,230,.8) 80%,#fbf4e6 94%,#fbf4e6 100%),url(hero-bg.jpg) 100% 14%/auto 480px no-repeat}
+}
+</style>
+
 </head>
 <body class="homepage">
 <div class="top"><div class="wrap">
@@ -20,7 +34,7 @@
 <h1>Good coffee, brighter days.</h1>
 <p>Coffee and pastries in Dumaguete City.</p>
 <div class="btns"><a class="btn primary" href="order.html"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v2M14 2v2M6 2v2"/><path d="M16 8h1a4 4 0 0 1 0 8h-1"/><path d="M4 8h12v9a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4Z"/></svg>View menu</a><a class="btn" href="#visit"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Find us</a></div>
-<div class="herochips"><span class="hchip" id="openChip"><i class="dot"></i><span>Open daily · 8 AM – 10 PM</span></span><span class="hchip">Pickup &amp; dine in</span><span class="hchip">GCash · Maya · Cash</span></div>
+<div class="herochips"><span class="hchip" id="openChip"><i class="dot"></i><span>Open Mon – Sat · 10 AM – 10 PM</span></span><span class="hchip">Pickup &amp; dine in</span><span class="hchip">GCash · Maya · Cash</span></div>
 </div>
 </div>
 </div></div>
@@ -56,7 +70,7 @@
 <p class="sub">Drop by for a cup.</p>
 <div class="contact">
 <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><h4>Address</h4><p>Colon Extension–Meciano Rd<br>Dumaguete City, 6200<br>Negros Oriental</p><a class="link" href="https://maps.app.goo.gl/ZycP4yr76Z7FSn2x6" target="_blank" rel="noopener">Get directions<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
-<div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><h4>Hours</h4><p>Daily · 8:00 AM – 10:00 PM</p><span class="openbadge" id="openBadge"><i class="dot"></i><span>Checking…</span></span></div>
+<div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><h4>Hours</h4><p>Mon – Sat · 10:00 AM – 10:00 PM<br>Closed on Sundays</p><span class="openbadge" id="openBadge"><i class="dot"></i><span>Checking…</span></span></div>
 </div>
 </section>
 
@@ -83,11 +97,12 @@
 <script>
 (function(){
   /* open / closed status (shop hours: edit OPEN and CLOSE if they change) */
-  var OPEN=8,CLOSE=22;
-  function manilaHour(){try{var p=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Manila",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date()),h=+p.filter(function(x){return x.type==="hour"})[0].value%24,m=+p.filter(function(x){return x.type==="minute"})[0].value;return h+m/60}catch(e){var d=new Date();return d.getHours()+d.getMinutes()/60}}
+  var OPEN=10,CLOSE=22; /* Monday to Saturday; closed on Sundays */
+  function manilaNow(){try{var p=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Manila",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date()),g=function(t){return p.filter(function(x){return x.type===t})[0].value};return{day:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(g("weekday")),h:+g("hour")%24+ +g("minute")/60}}catch(e){var d=new Date();return{day:d.getDay(),h:d.getHours()+d.getMinutes()/60}}}
   function status(){
-    var h=manilaHour(),open=h>=OPEN&&h<CLOSE;
-    var txt=open?"Open now · closes 10:00 PM":"Closed now · opens 8:00 AM";
+    var n=manilaNow(),open=n.day!==0&&n.h>=OPEN&&n.h<CLOSE;
+    var nextMon=n.day===0||(n.day===6&&n.h>=CLOSE);
+    var txt=open?"Open now · closes 10:00 PM":(nextMon?"Closed now · opens Monday 10:00 AM":"Closed now · opens 10:00 AM");
     var chip=document.getElementById("openChip"),badge=document.getElementById("openBadge");
     [chip,badge].forEach(function(el){if(!el)return;el.classList.toggle("is-open",open);el.classList.toggle("is-closed",!open);el.querySelector("span").textContent=txt});
   }

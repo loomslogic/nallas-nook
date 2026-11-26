@@ -445,3 +445,15 @@ h1{letter-spacing:-.02em}
   .homepage .hero .hchip{background:rgba(255,250,240,.85);color:var(--text);border-color:var(--line)}
 }
 .howcta .btn,.homepage section .btn.primary{background:linear-gradient(135deg,#dc6c2e,#b84a14);color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(194,86,27,.28)}
+
+/* ===== Mobile hero: same banner picture as desktop, cream style ===== */
+@media(max-width:760px){
+  .homepage .top{position:relative;color:var(--text);background:#fbf4e6}
+  .homepage .top::before{content:"";position:absolute;left:0;right:0;top:70px;height:372px;pointer-events:none;background:linear-gradient(180deg,#fbf4e6 0,rgba(251,244,230,0) 13%,rgba(251,244,230,0) 60%,rgba(251,244,230,.8) 80%,#fbf4e6 94%,#fbf4e6 100%),url(hero-bg.jpg) 100% 42%/cover no-repeat}
+  .homepage header .logo{color:var(--text)}
+  .homepage header nav a{color:#6b5444}
+  .homepage .hero{padding:338px 0 84px}
+}
+@media(min-width:520px) and (max-width:760px){
+  .homepage .top::before{background:linear-gradient(180deg,#fbf4e6 0,rgba(251,244,230,0) 13%,rgba(251,244,230,0) 60%,rgba(251,244,230,.8) 80%,#fbf4e6 94%,#fbf4e6 100%),url(hero-bg.jpg) 100% 14%/auto 480px no-repeat}
+}
