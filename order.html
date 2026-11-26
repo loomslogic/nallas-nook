@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Order online · Nalla’s Nook</title>
+<link rel="icon" type="image/png" href="nallas-nook-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap">
+<link rel="stylesheet" href="styles.css?v=33">
+</head>
+<body class="orderpage">
+<div class="top slim"><div class="wrap">
+<header><a class="brand" href="index.html"><img src="nallas-nook-logo.png" alt="Nalla’s Nook logo"><span class="logo">Nalla’s Nook</span></a><nav><a href="index.html">Home</a><a href="contact.html">Contact</a></nav></header>
+<div class="ohero"><div class="eyebrow">Online order &amp; pickup</div><h1>Order ahead</h1></div>
+</div></div>
+
+<div class="wrap omain">
+<div id="notice"></div>
+<ol class="steps" id="steps"><li data-s="1" class="on">Menu</li><li data-s="2">Cart</li><li data-s="3">Checkout</li><li data-s="4">Payment</li><li data-s="5">Done</li></ol>
+
+<div class="ostep" id="step1">
+  <label class="searchbar" aria-label="Search the menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Search menu…" autocomplete="off"></label>
+  <div class="shop">
+    <nav class="rail" id="rail" aria-label="Categories"></nav>
+    <div class="shopmain">
+      <div class="banner" id="banner"><div><b>Fresh coffee, ready when you are</b><span>Order ahead and skip the line</span></div></div>
+      <div id="menuRoot"></div>
+    </div>
+  </div>
+</div>
+
+<div class="ostep" id="step2" hidden>
+  <div class="sthead"><button class="back" id="bk2" aria-label="Back">←</button><div><h2>Your cart</h2><span class="hint">Review your order</span></div></div>
+  <div class="card" id="reviewList"></div>
+  <button class="obtn big" id="toDetails">Checkout →</button>
+</div>
+
+<div class="ostep" id="step3" hidden>
+  <div class="sthead"><button class="back" id="bk3" aria-label="Back">←</button><div><h2>Checkout</h2><span class="hint">Complete your order</span></div></div>
+  <form id="detailsForm" novalidate>
+    <h3 class="qhead">How would you like to receive your order?</h3>
+    <div class="optcards" id="typeSeg">
+      <button type="button" data-t="pickup" class="on"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span>Pick up</span></button>
+      <button type="button" data-t="dine_in"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 2-2.5 5-2.5 8h2.5v10"/></svg><span>Dine in</span></button>
+    </div>
+    <div class="hint" id="dineNote"></div>
+
+    <div class="card oform">
+      <h3>Customer information</h3><span class="hint">Please provide the following details</span>
+      <label>Full name *<input id="fName" maxlength="80" placeholder="e.g. Maria Santos" autocomplete="name"></label>
+      <label>Mobile number *<input id="fMobile" inputmode="numeric" maxlength="11" placeholder="09XXXXXXXXX" autocomplete="tel"></label>
+      <label id="seatsWrap" hidden>How many seats do you need? *<input id="fSeats" type="number" min="1" max="20" value="2"></label>
+      <label>Arrival time<select id="fArrive"><option>Within 15 minutes</option><option selected>Within 30 minutes</option><option>Within 1 hour</option><option>Later today</option></select></label>
+      <label>Special instructions<textarea id="fNote" maxlength="300" rows="2" placeholder="e.g. Less ice, extra sugar, no straw"></textarea></label>
+    </div>
+
+    <div class="card oform"><h3>Order summary</h3><span class="hint">Review your order before checkout</span><div id="sumBox"></div></div>
+
+    <h3 class="qhead">Payment method</h3>
+    <div class="optcards pay" id="paym"></div>
+    <div class="hint" id="payNote"></div>
+
+    <label class="chk consent"><input type="checkbox" id="fConsent"><span>I agree that Nalla’s Nook may use my name and mobile number to process this order.</span></label>
+    <div class="err" id="formErr"></div>
+    <button type="submit" class="obtn big" id="toPay">Continue to payment →</button>
+  </form>
+</div>
+
+<div class="ostep" id="step4" hidden>
+  <div class="sthead"><div><h2 id="payTitle">Pay via GCash</h2><span class="hint">Send the exact amount, then attach your receipt</span></div></div>
+  <div class="gcash"><div class="gs">Send payment to</div><img id="payQr" class="qr" alt="Payment QR code" hidden><div class="gn" id="gNum"></div><div class="gs" id="gName"></div><div class="gs gap">Amount</div><div class="ga" id="gAmt"></div></div>
+  <div class="card refcard"><div class="lbl">Your reference number</div><div class="ref" id="refNo"></div><div class="hint">Write this in the payment note or message field.</div></div>
+  <div class="card hint2"><span id="payHow">Open GCash → Send Money → enter the number above → exact amount → type your reference number in the note → Send.</span></div>
+  <div class="card"><div class="lbl"><span id="proofLbl">GCash</span> screenshot * <span class="hint">Attach your payment receipt to continue</span></div><input type="file" id="proof" accept="image/*"><img id="proofPrev" alt="" hidden></div>
+  <div class="err" id="payErr"></div>
+  <button class="obtn big" id="paid" disabled>✓ I’ve sent the payment</button>
+</div>
+
+<div class="ostep" id="step5" hidden>
+  <div class="sthead"><div><h2>Order received</h2><span class="hint">Thank you!</span></div></div>
+  <div class="card done"><div class="lbl">Reference number</div><div class="ref" id="doneRef"></div><div class="pill2" id="doneStatus"></div><div class="cdtimer" id="doneTimer" hidden></div><p id="doneMsg"></p></div>
+  <button class="obtn big" id="newOrder">Start a new order</button>
+</div>
+</div>
+
+<div class="cartbar" id="cartbar" hidden><div class="cartin"><div class="cbl"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h2.5l2.2 11h10.6l2-8H6.5"/></svg><div><b id="cbCount"></b><span id="cbTotal"></span></div></div><button class="obtn" id="cbGo">View cart →</button></div></div>
+
+<div class="sheet" id="sheet" hidden><div class="sheetbg" data-close="1"></div><div class="sheetbox" id="sheetBox"></div></div>
+
+<script>window.__errs=[];window.addEventListener('error',function(e){var t=e.target;__errs.push(t&&t.tagName==='SCRIPT'?'Could not load '+(t.getAttribute('src')||'a script'):(e.message||'Error')+(e.filename?' ('+String(e.filename).split('/').pop().split('?')[0]+', line '+e.lineno+')':''))},true)</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.109.0/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="menu.js?v=17"></script>
+<script src="shop.js?v=17"></script>
+<script src="order.js?v=17"></script>
+<script>if(!window.__orderLoaded)document.getElementById("notice").innerHTML='<div class="notice warn">order.js did not load. Upload order.js to the same folder as order.html, then reload.<br><small>Details: '+((window.__errs||[]).join(" · ")||"no error reported (the file may be missing or empty)")+'</small></div>'</script>
+<script>setTimeout(function(){var s=document.querySelector(".shop"),n=document.getElementById("notice");if(s&&n&&getComputedStyle(s).display!=="grid")n.innerHTML='<div class="notice warn">The page style file is out of date. Upload the newest styles.css to your repo, then reload in a private tab.</div>'},900)</script>
+</body>
+</html>

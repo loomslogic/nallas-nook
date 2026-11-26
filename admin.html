@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Staff · Nalla’s Nook</title>
+<link rel="icon" type="image/png" href="nallas-nook-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap">
+<link rel="stylesheet" href="styles.css?v=33">
+</head>
+<body class="orderpage">
+<div class="top slim"><div class="wrap">
+<header><a class="brand" href="index.html"><img src="nallas-nook-logo.png" alt="Nalla’s Nook logo"><span class="logo">Nalla’s Nook</span></a><nav id="signedIn" hidden><button class="olink" id="signOut">Sign out</button></nav></header>
+<div class="ohero"><div class="eyebrow">Staff area</div><h1>Admin</h1></div>
+</div></div>
+
+<div class="wrap omain">
+<div id="notice"></div>
+
+<div id="login" class="card oform" hidden>
+  <div class="lbl">Staff login</div>
+  <label>Email<input id="aEmail" type="email" autocomplete="username"></label>
+  <label>Password<input id="aPass" type="password" autocomplete="current-password"></label>
+  <div class="err" id="loginErr"></div>
+  <button class="obtn big" id="doLogin">Unlock</button>
+</div>
+
+<div id="panel" hidden>
+  <div class="chips" id="tabs"><button class="chip on" data-t="orders">Orders <span id="badge"></span></button><button class="chip" data-t="store">Store &amp; payments</button><button class="chip" data-t="menu">Menu items</button><button class="chip" data-t="account">Account</button></div>
+
+  <div class="atab" id="t-orders">
+    <div class="seg" id="ofilter"><button class="on" data-f="active">Active</button><button data-f="all">All</button></div>
+    <div id="orders"></div>
+  </div>
+
+  <div class="atab" id="t-store" hidden>
+    <div class="card oform"><h3>Store status</h3><div class="hint">Turning the store off blocks all new orders immediately.</div>
+      <div class="seg" id="openSeg"><button data-v="1">Open</button><button data-v="0">Closed</button></div>
+      <label>Message shown to customers<input id="sMsg" maxlength="140" placeholder="e.g. We’re closed due to flood"></label>
+      <div class="lbl">Reopens at (optional)</div><div class="quick" data-for="store"></div><div class="hint" id="sWhen"></div>
+    </div>
+    <div class="card oform"><h3>Dine in availability</h3><div class="hint">Pickup stays available either way. This only controls Dine in.</div>
+      <div class="seg" id="dineSeg"><button data-v="1">Available</button><button data-v="0">Not available</button></div>
+      <label>Reason shown to customers<input id="dReason" maxlength="140" placeholder="e.g. Peak hours"></label>
+      <div class="lbl">Available again at (optional)</div><div class="quick" data-for="dine"></div><div class="hint" id="dWhen"></div>
+    </div>
+
+    <div class="card oform"><h3>Payment methods</h3><div class="hint">Choose which payment options customers can pick at checkout.</div>
+      <div class="pm"><div class="lbl">GCash</div><div class="seg" id="pgSeg"><button data-v="1">On</button><button data-v="0">Off</button></div>
+        <label>GCash number<input id="gNumIn" maxlength="20"></label>
+        <label>Account name<input id="gNameIn" maxlength="60"></label>
+        <div class="qrbox"><img id="gQrImg" class="qr" alt="GCash QR" hidden><label>GCash QR code (optional)<input type="file" id="gQrFile" accept="image/*"></label><button type="button" class="olink" id="gQrClear" hidden>Remove QR</button></div></div>
+      <div class="pm"><div class="lbl">Maya</div><div class="seg" id="pmSeg"><button data-v="1">On</button><button data-v="0">Off</button></div>
+        <label>Maya number<input id="mNumIn" maxlength="20"></label>
+        <label>Account name<input id="mNameIn" maxlength="60"></label>
+        <div class="qrbox"><img id="mQrImg" class="qr" alt="Maya QR" hidden><label>Maya QR code (optional)<input type="file" id="mQrFile" accept="image/*"></label><button type="button" class="olink" id="mQrClear" hidden>Remove QR</button></div></div>
+      <div class="pm"><div class="lbl">Pay at the counter (cash)</div><div class="seg" id="pcSeg"><button data-v="1">On</button><button data-v="0">Off</button></div>
+        <div class="hint">Safety rules: staff only start preparing after payment is received, and unpaid counter orders cancel themselves.</div>
+        <div class="row2"><label>Max order amount (₱)<input id="cMax" type="number" min="50" step="10" inputmode="numeric" placeholder="300"></label><label>Pay within (minutes)<input id="cWin" type="number" min="5" max="120" step="1" inputmode="numeric" placeholder="20"></label></div>
+        <label>Block a number after this many missed payments (0 = never block)<input id="cBlock" type="number" min="0" max="10" step="1" inputmode="numeric" placeholder="2"></label>
+        <div class="hint" id="cNote"></div></div>
+    </div>
+    <button class="obtn big" id="saveStore">Save changes</button><button class="olink" id="discardStore">Discard &amp; reload</button><div class="hint" id="storeMsg"></div>
+  </div>
+
+  <div class="atab" id="t-menu" hidden>
+    <div class="card oform"><h3>Menu items</h3><div class="hint">On = orderable. Sold out = visible but greyed out. Remove = hidden from customers. All reversible.</div>
+      <div class="row2"><label>Filter by category<select id="mCat"></select></label><button class="obtn" id="addItem">＋ Add item</button></div></div>
+
+    <div class="card oform" id="itemForm" hidden>
+      <h3 id="formTitle">Add item</h3>
+      <label>Item name *<input id="iName" maxlength="80" placeholder="e.g. Iced Mocha"></label>
+      <label>Category *<input id="iCat" list="catList" maxlength="60" placeholder="Pick one or type a new category"></label><datalist id="catList"></datalist>
+      <div class="row2"><label>Price *<input id="iP1" type="number" min="1" step="1" inputmode="numeric" placeholder="120"></label><label>Size name<input id="iL1" maxlength="20" placeholder="16oz (only if 2 sizes)"></label></div>
+      <div class="row2"><label>Second size price (optional)<input id="iP2" type="number" min="1" step="1" inputmode="numeric" placeholder="140"></label><label>Second size name<input id="iL2" maxlength="20" placeholder="22oz"></label></div>
+      <label>Short description (optional)<input id="iDesc" maxlength="120" placeholder="e.g. Espresso with milk and ice"></label>
+      <div class="qrbox"><img id="iImg" class="thumb" alt="" hidden><label>Photo<input type="file" id="iFile" accept="image/*"></label><button type="button" class="olink" id="iImgClear" hidden>Remove photo</button></div>
+      <div class="err" id="iErr"></div>
+      <button class="obtn big" id="saveItem">Save item</button>
+      <button class="olink" id="cancelItem">Cancel</button>
+      <button class="olink danger" id="deleteItem" hidden>Delete this item</button>
+    </div>
+
+    <div id="mList"></div>
+    <button class="obtn big" id="saveMenu">Save status changes</button><button class="olink" id="discardMenu">Discard &amp; reload</button><div class="hint" id="menuMsg"></div>
+  </div>
+
+  <div class="atab" id="t-account" hidden>
+    <div class="card oform"><h3>Change admin password</h3><div class="hint">Minimum 8 characters. It works on every device.</div>
+      <label>New password<input id="pNew" type="password" autocomplete="new-password" placeholder="At least 8 characters"></label>
+      <label>Confirm new password<input id="pNew2" type="password" autocomplete="new-password" placeholder="Type it again"></label>
+      <div class="err" id="pErr"></div><button class="obtn big" id="updPass">Update password</button></div>
+  </div>
+</div>
+</div>
+
+<script>window.__errs=[];window.addEventListener('error',function(e){var t=e.target;__errs.push(t&&t.tagName==='SCRIPT'?'Could not load '+(t.getAttribute('src')||'a script'):(e.message||'Error')+(e.filename?' ('+String(e.filename).split('/').pop().split('?')[0]+', line '+e.lineno+')':''))},true)</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.109.0/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="menu.js?v=17"></script>
+<script src="shop.js?v=17"></script>
+<script src="admin.js?v=17"></script>
+<script>if(!window.__adminLoaded)document.getElementById("notice").innerHTML='<div class="notice warn">admin.js did not load. Upload admin.js to the same folder as admin.html, then reload.<br><small>Details: '+((window.__errs||[]).join(" · ")||"no error reported (the file may be missing or empty)")+'</small></div>'</script>
+</body>
+</html>
