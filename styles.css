@@ -1,5 +1,4 @@
 :root{--bg:#faf6ef;--surface:#fff;--text:#2a1410;--muted:#7a6a62;--line:#eadfd2;--accent:#7b3326;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root{--bg:#1c0f0c;--surface:#28160f;--text:#f3ebdd;--muted:#b3a294;--line:#3a231b;--accent:#e0c9a0;color-scheme:dark}}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.6}
@@ -429,3 +428,20 @@ h1{letter-spacing:-.02em}
   header nav{flex:none}
 }
 @media(max-width:360px){header .logo{font-size:.78rem!important;letter-spacing:.01em!important}}
+
+/* ===== Cream theme (always on, matches the logo) ===== */
+:root{--bg:#fbf4e6;--surface:#fffaf0;--text:#3b2214;--muted:#7d6a5a;--line:#e8d9bd;--accent:#c2561b;color-scheme:light}
+.openbadge.is-open{color:#15803d;background:rgba(34,197,94,.14)}
+.openbadge.is-closed{color:#b45309;background:rgba(245,158,11,.16)}
+.step3 .num,.fav:nth-child(1) .rk{color:#fff;background:linear-gradient(135deg,#dc6c2e,#b84a14);box-shadow:0 8px 20px rgba(194,86,27,.28)}
+@media(max-width:760px){
+  .fab{color:#fff;background:linear-gradient(135deg,#dc6c2e,#b84a14)}
+  .homepage .top{background:linear-gradient(180deg,rgba(251,244,230,0) 0,rgba(251,244,230,0) 56%,#fbf4e6 92%) 0 0/100% 108vw no-repeat,url(hero-mobile-v2.jpg) 54% 0/167% auto no-repeat,#fbf4e6}
+  .homepage .hero .eyebrow{color:var(--accent)}
+  .homepage .hero h1{color:var(--text)}
+  .homepage .hero p{color:#6b5444}
+  .homepage .hero .btn{border-color:var(--accent);color:var(--accent)}
+  .homepage .hero .btn.primary{background:linear-gradient(135deg,#dc6c2e,#b84a14);color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(194,86,27,.3)}
+  .homepage .hero .hchip{background:rgba(255,250,240,.85);color:var(--text);border-color:var(--line)}
+}
+.howcta .btn,.homepage section .btn.primary{background:linear-gradient(135deg,#dc6c2e,#b84a14);color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(194,86,27,.28)}
